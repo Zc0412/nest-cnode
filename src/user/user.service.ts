@@ -43,7 +43,7 @@ export class UserService {
    * 查找user
    * @param login_name
    */
-  async findOne(login_name: string) {
+  async findOne(login_name: string): Promise<User> {
     return await this.userRepository.findOne({ where: { login_name } });
   }
 }
