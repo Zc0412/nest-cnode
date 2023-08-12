@@ -4,12 +4,14 @@ import { Repository } from 'typeorm';
 import { cryptoPassword } from '../utils/cryptoUtil';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   /**
@@ -35,8 +37,10 @@ export class UserService {
       name: createUser.login_name,
       avatar: 'https://randomuser.me/api/portraits/lego/0.jpg',
     };
-    const newUser = await this.userRepository.create(user);
-    return await this.userRepository.save(newUser);
+    const resultUser = await this.userRepository.create(user);
+    const saveUser = await this.userRepository.save(resultUser);
+    const payload = { sub: saveUser.id, username: saveUser.login_name };
+    return { access_token: await this.jwtService.signAsync(payload) };
   }
 
   /**
