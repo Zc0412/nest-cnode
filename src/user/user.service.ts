@@ -39,7 +39,7 @@ export class UserService {
     };
     const resultUser = await this.userRepository.create(user);
     const saveUser = await this.userRepository.save(resultUser);
-    const payload = { sub: saveUser.id, username: saveUser.login_name };
+    const payload = { id: saveUser.id, username: saveUser.login_name };
     return { access_token: await this.jwtService.signAsync(payload) };
   }
 
@@ -49,5 +49,15 @@ export class UserService {
    */
   async findOne(login_name: string): Promise<User> {
     return await this.userRepository.findOne({ where: { login_name } });
+  }
+
+  /**
+   * 更新积分
+   * @param id
+   */
+  async updateScore(id: string) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    user.score += 5;
+    await this.userRepository.update(id, { score: user.score });
   }
 }
