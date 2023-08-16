@@ -39,6 +39,16 @@ export class TopicController {
     return this.topicService.update(id, updateTopicDto);
   }
 
+  @Patch(':id/top')
+  updateTop(@Param('id') id: string) {
+    return this.topicService.updateTop(id);
+  }
+
+  @Patch(':id/good')
+  updateGood(@Param('id') id: string) {
+    return this.topicService.updateGood(id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.topicService.remove(id);

@@ -1,4 +1,13 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Request,
+  Ip,
+} from '@nestjs/common';
+import * as parser from 'ua-parser-js';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Public } from '../auth/decorators/public.decorator';
@@ -11,10 +20,17 @@ export class UserController {
   /**
    * 注册
    * @param createUserDto
+   * @param req
+   * @param ip
    */
   @Public()
   @Post('register')
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: CreateUserDto, @Request() req, @Ip() ip) {
+    // TODO
+    const ua = parser(req.headers['user-agent']);
+    console.log(ua);
+    console.log(req.headers['user-agent']);
+    console.log(ip);
     return this.userService.create(createUserDto);
   }
 

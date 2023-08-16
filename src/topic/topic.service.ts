@@ -68,6 +68,38 @@ export class TopicService {
   }
 
   /**
+   * 置顶
+   * @param id
+   */
+  async updateTop(id: string) {
+    const topic = await this.topicRepository.findOne({
+      where: { id, deleted: false },
+    });
+    if (!topic) {
+      throw new NotFoundException();
+    }
+    topic.top = !topic.top;
+    await this.topicRepository.update(id, { top: topic.top });
+    return topic;
+  }
+
+  /**
+   * 精华
+   * @param id
+   */
+  async updateGood(id: string) {
+    const topic = await this.topicRepository.findOne({
+      where: { id, deleted: false },
+    });
+    if (!topic) {
+      throw new NotFoundException();
+    }
+    topic.good = !topic.good;
+    await this.topicRepository.update(id, { good: topic.good });
+    return topic;
+  }
+
+  /**
    * delete topic
    * @param id
    */
