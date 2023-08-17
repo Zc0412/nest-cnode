@@ -21,7 +21,7 @@ async function bootstrap() {
   // hbs 模板引擎
   app.setViewEngine('hbs');
   // 监听端口
-  await app.listen(process.env.PORT);
+  await app.listen(process.env.PORT || 3000);
 }
 
 bootstrap();
