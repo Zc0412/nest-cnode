@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import { UserAgent } from './user-agent.entity';
 
 @Entity('users')
 export class User {
@@ -78,4 +81,8 @@ export class User {
 
   @UpdateDateColumn()
   update_at: Date;
+
+  @OneToOne(() => UserAgent, { cascade: true })
+  @JoinColumn()
+  user_agent: UserAgent;
 }

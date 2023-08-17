@@ -26,12 +26,21 @@ export class UserController {
   @Public()
   @Post('register')
   create(@Body() createUserDto: CreateUserDto, @Request() req, @Ip() ip) {
-    // TODO
-    const ua = parser(req.headers['user-agent']);
-    console.log(ua);
-    console.log(req.headers['user-agent']);
-    console.log(ip);
-    return this.userService.create(createUserDto);
+    // 获取ua
+    const userAgentDetail = parser(req.headers['user-agent']);
+    const userAgent = {
+      ua:userAgentDetail.ua,
+      browser_name:userAgentDetail.browser.name,
+      browser_version:userAgentDetail.browser.version,
+      engine_name:userAgentDetail.engine.name,
+      engine_version:userAgentDetail.engine.version,
+      os_name:userAgentDetail.os.name,
+      os_version:userAgentDetail.os.version,
+      device_vendor:userAgentDetail.device.vendor,
+      device_model:userAgentDetail.device.model,
+      ip
+    }
+    return this.userService.create(createUserDto,userAgent);
   }
 
   /**

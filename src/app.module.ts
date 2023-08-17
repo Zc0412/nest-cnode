@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TopicModule } from './topic/topic.module';
 import { Topic } from './topic/entities/topic.entity';
+import { UserAgent } from './user/entities/user-agent.entity';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { Topic } from './topic/entities/topic.entity';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_DATABASE,
-      entities: [User, Topic],
+      entities: [User, UserAgent, Topic],
       synchronize: true,
     }),
     UserModule,
