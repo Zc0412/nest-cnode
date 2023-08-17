@@ -23,7 +23,7 @@ import { UserAgent } from './user/entities/user-agent.entity';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_DATABASE,
       entities: [User, UserAgent, Topic],
-      // synchronize: true,
+      synchronize: true,
     }),
     UserModule,
     AuthModule,
