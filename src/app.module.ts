@@ -10,6 +10,10 @@ import { TopicModule } from './topic/topic.module';
 import { Topic } from './topic/entities/topic.entity';
 import { UserAgent } from './user/entities/user-agent.entity';
 
+const { MYSQL_DATABASE, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_HOST } =
+  process.env;
+console.log(MYSQL_PASSWORD);
+
 @Module({
   imports: [
     // 配置.env
@@ -17,11 +21,11 @@ import { UserAgent } from './user/entities/user-agent.entity';
     // 配置typeorm
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: MYSQL_HOST,
       port: 3306,
-      username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_DATABASE,
+      username: MYSQL_USERNAME,
+      password: MYSQL_PASSWORD || '123456',
+      database: MYSQL_DATABASE,
       entities: [User, UserAgent, Topic],
       synchronize: true,
     }),

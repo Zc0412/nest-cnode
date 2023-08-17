@@ -29,18 +29,18 @@ export class UserController {
     // 获取ua
     const userAgentDetail = parser(req.headers['user-agent']);
     const userAgent = {
-      ua:userAgentDetail.ua,
-      browser_name:userAgentDetail.browser.name,
-      browser_version:userAgentDetail.browser.version,
-      engine_name:userAgentDetail.engine.name,
-      engine_version:userAgentDetail.engine.version,
-      os_name:userAgentDetail.os.name,
-      os_version:userAgentDetail.os.version,
-      device_vendor:userAgentDetail.device.vendor,
-      device_model:userAgentDetail.device.model,
-      ip
-    }
-    return this.userService.create(createUserDto,userAgent);
+      ua: userAgentDetail.ua,
+      browser_name: userAgentDetail.browser.name,
+      browser_version: userAgentDetail.browser.version,
+      engine_name: userAgentDetail.engine.name,
+      engine_version: userAgentDetail.engine.version,
+      os_name: userAgentDetail.os.name,
+      os_version: userAgentDetail.os.version,
+      device_vendor: userAgentDetail.device.vendor,
+      device_model: userAgentDetail.device.model,
+      ip,
+    };
+    return this.userService.create(createUserDto, userAgent);
   }
 
   /**
