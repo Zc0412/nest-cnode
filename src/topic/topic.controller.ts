@@ -18,7 +18,7 @@ import { UpdateTopicDto } from './dto/update-topic.dto';
 export class TopicController {
   constructor(private readonly topicService: TopicService) {}
 
-  @Post('create')
+  @Post()
   @HttpCode(HttpStatus.OK)
   create(@Body() createTopicDto: CreateTopicDto, @Request() req) {
     return this.topicService.create(createTopicDto, req.user.id);
